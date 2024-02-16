@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+
+
+    <title>CRUD Application</title>
+</head>
+<body>
+
+    <!--- Start with Container -->
+<div class="container">
+
+    <div class="row bg-success m-1 block">
+        <div class="text-center col-md-12">
+            <h1><i class="fa-brands fa-product-hunt"></i> CRUDS APPLICATION <span class="conutPro"></span></h1>
+        </div>
+    </div>
+
+    <!-- Start with Cattegory -->
+    <div class="row bg-secondary m-1 block">
+        <div class="col-md-6 col-sm-12">
+            <div class="h-75">
+                <label id="lbcate">Category :*</label>
+                <select id="ddlcategory" class="form-control">
+
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <label id="lbInputCate">Category Name : *</label>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Enter Name Of Category" id="category">
+    
+                <div class="from-group-append">
+                    <button class="btn btn-success" onclick="return ValidationCategory()"><i class="fa-solid fa-floppy-disk"></i></button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#modelId" onclick="ShowCategory()"><i class="fa-solid fa-download"></i></button>
+    
+                </div>
+    
+            </div>
+        </div>
+            <!-- End with Cattegory -->
+    </div>
+
+    <!-- Product -->
+    <div class="row bg-secondary m-1 block">
+        <div class="col-md-4 col-sm-12">
+            <label id="lbPro">Product Name : *</label>
+            <input type="text" class="form-control" placeholder="Enter the Product Name" id="product">
+        </div>
+
+        <div class="col-md-2 col-sm-12">
+            <label id="lbQuntity">Quntity : *</label>
+            <input type="number" class="form-control" placeholder="Enter the Product Name" value="0" id="quntity" onkeyup="GetTotal()" onchange="GetTotal()">
+        </div>
+
+        <div class="col-md-2 col-sm-12">
+            <label id="lbPrice">Price : *</label>
+            <input type="number" class="form-control" placeholder="Enter the Product Name" value="0" id="price" onkeyup="GetTotal()" onchange="GetTotal()">
+        </div>
+
+
+        <div class="col-md-2 col-sm-12">
+            <label id="lbDiscount">Discount : *</label>
+            <input type="number" class="form-control" placeholder="Enter the Product Name" value="0" id="disconut" onkeyup="GetTotal()" onchange="GetTotal()">
+        </div>
+
+        
+        <div class="col-md-2 col-sm-12" style="margin-top: 10px;">
+            <label id="lbTotal">Totale : *</label>
+            <input type="number" class="form-control bg-danger text-center" placeholder="Enter the Product Name" value="0" id="totale" disabled>
+        </div>
+
+        <div class="text-center col-md-12">
+            <button class="btn btn-dark w-25" onclick="Rest()"><i class="fa-regular fa-trash-can"></i></button>
+            <button class="btn btn-success w-25" onclick="return ValidationProduct();" id="btnSave"><i class="fa-solid fa-download"></i></button>
+
+        </div>
+    </div>
+    <!-- End Product -->
+
+     <!-- Table  -->
+     <div class="row bg-secondary m-1 block">
+        <div class="col-md-12">
+        <table class="tabel table-striped table-border table-hover table-responsive bg-white col-md-12" id="tablPro">
+            <thead>
+                <tr>
+                    <td class="col-1">#</td>
+                    <td class="col-2">Category</td>
+                    <td class="col-2">Product</td>
+                    <td class="col-2">Quntity</td>
+                    <td class="col-1">Price</td>
+                    <td class="col-1">Discount</td>
+                    <td class="col-1">Totale</td>
+                    <td class="col-2">Events</td>
+
+
+                </tr>
+            </thead>
+            <tbody id="tbalePro">
+
+            </tbody>
+        </table>
+    </div>
+     </div>
+     <!-- End Table -->
+
+        <!--- End with Container -->
+</div>
+
+ 
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Category <span id="ConutCategory"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <table class="tabel table-striped table-border table-hover table-responsive bg-white w-100 text-center m-0" id="tablPro">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Category</td>
+                                <td class="col-2">Events</td>
+
+            
+                            </tr>
+                        </thead>
+                        <tbody id="BodyCategory">
+
+                            
+                         </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+ 
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="JavaScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: darkolivegreen;
+}
+
+.block{
+    border-radius: 10px;
+    padding: 20px;
+}
+h1,
+label{
+    color: #fff;
+}
+
+table thead tr td{
+    margin-left: 100px;
+}
+
+
